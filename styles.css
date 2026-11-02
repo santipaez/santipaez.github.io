@@ -841,6 +841,8 @@ a:hover {
 }
 
 .card {
+  display: flex;
+  flex-direction: column;
   padding: 1.6rem clamp(0rem, 2vw, 1.75rem) 1.9rem;
   border-bottom: 1px solid var(--rule);
   border-right: 1px solid var(--rule);
@@ -994,4 +996,32 @@ a:hover {
   margin-top: 0.75rem;
   font-size: 0.62rem;
   max-width: 40ch;
+}
+/* ---------- card diagrams ---------- */
+
+.card-head {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.card-head h3 {
+  margin: 0;
+}
+
+.card-figure {
+  margin-top: auto;
+  padding-top: 1.5rem;
+}
+
+.card-figure svg {
+  display: block;
+  width: 100%;
+  max-width: 240px;
+  height: auto;
+}
+
+.card-figure text {
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
