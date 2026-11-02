@@ -17,6 +17,9 @@
 
 <a class="skip" href="#main">Skip to content</a>
 
+<div class="rail" aria-hidden="true"><span class="rail-fill"></span></div>
+<div class="cursor" aria-hidden="true"></div>
+
 <header class="masthead">
   <p class="label">Santiago Páez</p>
   <nav aria-label="Sections">
@@ -44,51 +47,64 @@
       wrong place.
     </p>
 
-    <div class="stack-frame" aria-hidden="true">
-      <svg class="stack" viewBox="0 0 360 300" role="presentation" focusable="false">
-        <g id="plates">
-          <path class="plate plate-3" d="M180 40 L320 110 L180 180 L40 110 Z" />
-          <path class="plate plate-2" d="M180 90 L320 160 L180 230 L40 160 Z" />
-          <path class="plate plate-1" d="M180 140 L320 210 L180 280 L40 210 Z" />
-          <path class="edge" d="M40 110 L40 210 M320 110 L320 210" />
-        </g>
-      </svg>
+    <div class="planes" aria-hidden="true">
+      <div class="plane plane-3"></div>
+      <div class="plane plane-2"></div>
+      <div class="plane plane-1"></div>
+      <ul class="plane-legend">
+        <li>Output</li>
+        <li>Retrieval</li>
+        <li>Identity</li>
+      </ul>
     </div>
 
     <p class="scroll-hint label" aria-hidden="true">Scroll</p>
   </section>
 
-  <section id="question" class="chapter" aria-labelledby="question-title">
+  <section id="question" class="chapter chapter-pinned" aria-labelledby="question-title">
     <p class="label">01</p>
     <h2 id="question-title">A control can be correct and still sit in the wrong place.</h2>
 
-    <div class="spread">
-      <div class="prose">
-        <p>
-          Filter search results after ranking and a caller loses the answer entirely when
-          documents they cannot read dominate the top. Filter before, and the answer
-          survives. The permission was right in both cases. Only its position changed.
-        </p>
-        <p>
-          Check permissions inside the prompt and the model has already read what it should
-          never have seen. Check them in the retrieval, and the document never enters the
-          window.
-        </p>
-        <p>
-          The same rule, three positions, three different outcomes. That gap is most of the
-          work.
-        </p>
-      </div>
+    <div class="pin">
+      <div class="pin-stage">
+        <article class="pin-step">
+          <span class="pin-ghost" aria-hidden="true">A</span>
+          <p class="label">Position A</p>
+          <p class="pin-line">Filter after ranking.</p>
+          <p class="pin-sub">
+            The answer disappears as soon as documents the caller cannot read fill the
+            top of the list.
+          </p>
+        </article>
 
-      <aside class="margin-note">
-        <p class="label">Note</p>
-        <p>
-          None of this is exotic. It is the same discipline as putting authorization on the
-          server instead of the client, moved to a place where most people are still
-          learning it.
-        </p>
-      </aside>
+        <article class="pin-step">
+          <span class="pin-ghost" aria-hidden="true">B</span>
+          <p class="label">Position B</p>
+          <p class="pin-line">Filter before ranking.</p>
+          <p class="pin-sub">
+            The same query returns the same answer, for every caller, at the same cost.
+          </p>
+        </article>
+
+        <article class="pin-step">
+          <span class="pin-ghost" aria-hidden="true">C</span>
+          <p class="label">The difference</p>
+          <p class="pin-line">Nothing about the rule changed.</p>
+          <p class="pin-sub">
+            Only where it sits. Most of the work is choosing the position.
+          </p>
+        </article>
+      </div>
     </div>
+
+    <aside class="margin-note">
+      <p class="label">Note</p>
+      <p>
+        None of this is exotic. It is the same discipline as putting authorization on the
+        server instead of the client, moved to a place where most people are still
+        learning it.
+      </p>
+    </aside>
   </section>
 
   <section id="evidence" class="chapter" aria-labelledby="evidence-title">
@@ -209,8 +225,8 @@
   <p class="colophon-note">Built by hand. No template, no page builder.</p>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+<script src="vendor/gsap.min.js" defer></script>
+<script src="vendor/ScrollTrigger.min.js" defer></script>
 <script src="main.js" defer></script>
 
 </body>

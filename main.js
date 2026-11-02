@@ -3,7 +3,8 @@
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   // Without GSAP, or when the visitor asked for less motion, the page stays
-  // exactly as authored: everything visible, nothing animated.
+  // exactly as authored: everything visible, nothing animated, the narrative
+  // reads as three stacked paragraphs instead of a pinned sequence.
   const bail = () => root.classList.remove("js");
 
   if (!window.gsap || !window.ScrollTrigger || reduceMotion) {
@@ -14,7 +15,8 @@
   const { gsap } = window;
   gsap.registerPlugin(window.ScrollTrigger);
 
-  /* Hero: the two name lines rise out of their masked containers. */
+  /* ---- hero ---- */
+
   gsap.from(".display .line-inner", {
     yPercent: 115,
     duration: 1.1,
@@ -32,48 +34,97 @@
     delay: 0.35,
   });
 
-  /* The stack separates with scroll depth and leans toward the pointer. */
-  const hero = document.querySelector(".hero");
-  const plates = gsap.utils.toArray(".plate");
+  const planes = document.querySelector(".planes");
 
-  plates.forEach((plate, index) => {
-    gsap.to(plate, {
-      y: (index + 1) * -26,
+  if (planes) {
+    const tiltX = gsap.quickTo(planes, "rotationX", { duration: 1, ease: "power2.out" });
+    const tiltY = gsap.quickTo(planes, "rotationY", { duration: 1, ease: "power2.out" });
+
+    window.addEventListener("pointermove", (event) => {
+      const x = event.clientX / window.innerWidth - 0.5;
+      const y = event.clientY / window.innerHeight - 0.5;
+      tiltY(x * 16);
+      tiltX(y * -12);
+    });
+
+    gsap.to(planes, {
+      rotationZ: 9,
+      y: -54,
+      ease: "none",
       scrollTrigger: {
-        trigger: hero,
+        trigger: ".hero",
         start: "top top",
         end: "bottom top",
-        scrub: 0.8,
+        scrub: 0.9,
       },
+    });
+  }
+
+  /* ---- pinned narrative ---- */
+
+  const pinned = document.querySelector(".chapter-pinned");
+  const wide = window.matchMedia("(min-width: 901px)").matches;
+
+  if (pinned && wide) {
+    pinned.classList.add("is-pinned");
+
+    const steps = gsap.utils.toArray(".pin-step");
+
+    if (steps.length > 2) {
+      const timeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".pin",
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 0.7,
+        },
+      });
+
+      steps.forEach((step, index) => {
+        if (index === 0) {
+          return;
+        }
+        timeline
+          .to(steps[index - 1], { opacity: 0, y: -30, duration: 0.35 }, index - 1)
+          .fromTo(
+            step,
+            { opacity: 0, y: 30 },
+            { opacity: 1, y: 0, duration: 0.35 },
+            index - 0.8
+          );
+      });
+    }
+  }
+
+  /* ---- reading progress ---- */
+
+  gsap.to(".rail-fill", {
+    scaleY: 1,
+    ease: "none",
+    scrollTrigger: {
+      trigger: document.body,
+      start: "top top",
+      end: "bottom bottom",
+      scrub: 0.3,
+    },
+  });
+
+  /* ---- figures and timeline ---- */
+
+  gsap.utils.toArray(".chapter").forEach((chapter) => {
+    const heading = chapter.querySelector("h2");
+    if (!heading) {
+      return;
+    }
+    gsap.from(heading, {
+      opacity: 0,
+      y: 18,
+      duration: 0.8,
+      ease: "power2.out",
+      scrollTrigger: { trigger: chapter, start: "top 78%" },
     });
   });
 
-  const shiftX = gsap.quickTo("#plates", "x", { duration: 0.9, ease: "power2.out" });
-  const shiftY = gsap.quickTo("#plates", "y", { duration: 0.9, ease: "power2.out" });
-
-  hero.addEventListener("pointermove", (event) => {
-    const rect = hero.getBoundingClientRect();
-    const x = (event.clientX - rect.left) / rect.width - 0.5;
-    const y = (event.clientY - rect.top) / rect.height - 0.5;
-    shiftX(x * 26);
-    shiftY(y * 18);
-  });
-
-  /* Chapter headings and rules arrive one at a time. */
-  gsap.utils.toArray(".chapter").forEach((chapter) => {
-    const heading = chapter.querySelector("h2");
-    if (heading) {
-      gsap.from(heading, {
-        opacity: 0,
-        y: 18,
-        duration: 0.8,
-        ease: "power2.out",
-        scrollTrigger: { trigger: chapter, start: "top 78%" },
-      });
-    }
-  });
-
-  /* Numbers count once, when the figure scrolls into view. */
   gsap.utils.toArray(".figure-value").forEach((node) => {
     const target = Number(node.dataset.countTo || 0);
     const counter = { value: 0 };
@@ -98,4 +149,27 @@
       scrollTrigger: { trigger: item, start: "top 88%" },
     });
   });
+
+  /* ---- cursor ---- */
+
+  const cursor = document.querySelector(".cursor");
+  const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+  if (cursor && finePointer) {
+    const moveX = gsap.quickTo(cursor, "x", { duration: 0.35, ease: "power3.out" });
+    const moveY = gsap.quickTo(cursor, "y", { duration: 0.35, ease: "power3.out" });
+
+    window.addEventListener("pointermove", (event) => {
+      moveX(event.clientX);
+      moveY(event.clientY);
+      cursor.classList.add("is-active");
+    });
+
+    document.querySelectorAll("a, .case, .timeline li").forEach((node) => {
+      node.addEventListener("pointerenter", () => cursor.classList.add("is-over"));
+      node.addEventListener("pointerleave", () => cursor.classList.remove("is-over"));
+    });
+
+    document.addEventListener("pointerleave", () => cursor.classList.remove("is-active"));
+  }
 })();
