@@ -18,7 +18,6 @@
 <a class="skip" href="#main">Skip to content</a>
 
 <div class="rail" aria-hidden="true"><span class="rail-fill"></span></div>
-<div class="cursor" aria-hidden="true"></div>
 
 <header class="masthead">
   <p class="label">Santiago Páez</p>
@@ -271,7 +270,7 @@
 
   <section id="evidence" class="chapter" aria-labelledby="evidence-title">
     <p class="label">03</p>
-    <h2 id="evidence-title">Two measurements, because a claim without a number is a wish.</h2>
+    <h2 id="evidence-title">Three investigations, each with a number behind it.</h2>
 
     <article class="case">
       <div class="case-meta">
@@ -348,6 +347,33 @@
           never be served. It refuses to scan without an explicit authorization flag and a
           recorded reason, because the difference between a posture check and an incident
           report is a signature.
+        </p>
+      </div>
+    </article>
+
+    <article class="case">
+      <div class="case-meta">
+        <h3>midea-mf200-tools</h3>
+        <p class="label">Python · protocol · reverse engineering</p>
+        <p class="figure-caption">
+          One bit controls cold-air ventilation. The drum and the fan run together without water
+          when that bit is set; the firmware just refuses to schedule it outside a completed wet
+          cycle.
+        </p>
+        <p class="links">
+          <a href="https://github.com/santipaez/midea-mf200-tools">Repository</a>
+          <a href="https://github.com/santipaez/midea-mf200-tools#readme">Method</a>
+        </p>
+      </div>
+
+      <div class="case-body">
+        <p class="figure"><span class="figure-value" data-count-to="1">1</span><span class="figure-unit">bit</span></p>
+        <p class="figure-label">Holds the whole feature</p>
+        <p class="prose-small">
+          Found the device on the local network, mapped the 22-byte control frame, and tested
+          five program ids against the physical machine while watching water, drum and heater.
+          The offsets are documented, and the finding was reported to the vendor, who confirmed
+          the decision is made globally rather than regionally.
         </p>
       </div>
     </article>

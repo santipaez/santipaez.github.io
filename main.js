@@ -151,26 +151,4 @@
     });
   });
 
-  /* ---- cursor ---- */
-
-  const cursor = document.querySelector(".cursor");
-  const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-
-  if (cursor && finePointer) {
-    const moveX = gsap.quickTo(cursor, "x", { duration: 0.35, ease: "power3.out" });
-    const moveY = gsap.quickTo(cursor, "y", { duration: 0.35, ease: "power3.out" });
-
-    window.addEventListener("pointermove", (event) => {
-      moveX(event.clientX);
-      moveY(event.clientY);
-      cursor.classList.add("is-active");
-    });
-
-    document.querySelectorAll("a, .case, .timeline li").forEach((node) => {
-      node.addEventListener("pointerenter", () => cursor.classList.add("is-over"));
-      node.addEventListener("pointerleave", () => cursor.classList.remove("is-over"));
-    });
-
-    document.addEventListener("pointerleave", () => cursor.classList.remove("is-active"));
-  }
 })();

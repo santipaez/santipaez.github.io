@@ -732,33 +732,9 @@ a:hover {
   transform: scaleY(0);
 }
 
-.cursor {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 26px;
-  height: 26px;
-  margin: -13px 0 0 -13px;
-  border: 1px solid var(--accent);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 20;
-  opacity: 0;
-  transition: width 200ms ease, height 200ms ease, margin 200ms ease, background-color 200ms ease, opacity 300ms ease;
-}
 
-.cursor.is-active { opacity: 1; }
 
-.cursor.is-over {
-  width: 54px;
-  height: 54px;
-  margin: -27px 0 0 -27px;
-  background: rgba(166, 75, 30, 0.08);
-}
 
-@media (hover: none), (pointer: coarse) {
-  .cursor { display: none; }
-}
 
 @media (max-width: 900px) {
   .planes {
