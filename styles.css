@@ -690,7 +690,14 @@ a:hover {
   margin: 0.6rem 0 1.2rem;
 }
 
+/* Hidden unless the pinned sequence is active. Without this guard the ghost
+   letters escape into the hero on narrow screens. */
 .pin-ghost {
+  display: none;
+}
+
+.js .chapter-pinned.is-pinned .pin-ghost {
+  display: block;
   position: absolute;
   left: min(52ch, 48vw);
   top: 50%;
@@ -895,5 +902,34 @@ a:hover {
 
   .stats {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+/* ---------- pinned sequence on small screens ---------- */
+
+@media (max-width: 900px) {
+  .js .chapter-pinned.is-pinned .pin {
+    height: 170vh;
+  }
+
+  .js .chapter-pinned.is-pinned .pin-stage {
+    padding-inline: var(--gutter);
+  }
+
+  .js .chapter-pinned.is-pinned .pin-step {
+    max-width: 100%;
+  }
+
+  .pin-line {
+    font-size: clamp(1.8rem, 8.5vw, 2.6rem);
+    line-height: 1.05;
+  }
+
+  /* The ghost letter collides with the paragraph at this width. */
+  .js .chapter-pinned.is-pinned .pin-ghost {
+    display: none;
+  }
+
+  .pin-sub {
+    font-size: 0.98rem;
   }
 }

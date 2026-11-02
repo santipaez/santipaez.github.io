@@ -1,13 +1,11 @@
-(() => {
+﻿(() => {
   const root = document.documentElement;
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  // Without GSAP, or when the visitor asked for less motion, the page stays
-  // exactly as authored: everything visible, nothing animated, the narrative
-  // reads as three stacked paragraphs instead of a pinned sequence.
+  // The motion is the design here, so it runs regardless of the operating
+  // system preference. Without GSAP the page stays fully readable.
   const bail = () => root.classList.remove("js");
 
-  if (!window.gsap || !window.ScrollTrigger || reduceMotion) {
+  if (!window.gsap || !window.ScrollTrigger) {
     bail();
     return;
   }
@@ -63,20 +61,27 @@
   /* ---- pinned narrative ---- */
 
   const pinned = document.querySelector(".chapter-pinned");
-  const wide = window.matchMedia("(min-width: 901px)").matches;
 
-  if (pinned && wide) {
+  if (pinned) {
     pinned.classList.add("is-pinned");
 
     const steps = gsap.utils.toArray(".pin-step");
 
     if (steps.length > 2) {
+      // Short transitions with a held slot each, plus snapping, so the page
+      // never parks on a half-faded step.
       const timeline = gsap.timeline({
         scrollTrigger: {
           trigger: ".pin",
           start: "top top",
           end: "bottom bottom",
-          scrub: 0.7,
+          scrub: 0.6,
+          snap: {
+            snapTo: 1 / (steps.length - 1),
+            duration: 0.3,
+            ease: "power2.inOut",
+            delay: 0.05,
+          },
         },
       });
 
@@ -85,13 +90,9 @@
           return;
         }
         timeline
-          .to(steps[index - 1], { opacity: 0, y: -30, duration: 0.35 }, index - 1)
-          .fromTo(
-            step,
-            { opacity: 0, y: 30 },
-            { opacity: 1, y: 0, duration: 0.35 },
-            index - 0.8
-          );
+          .to(steps[index - 1], { opacity: 0, y: -22, duration: 0.1 }, index - 0.95)
+          .to(step, { opacity: 1, y: 0, duration: 0.1 }, index - 0.9)
+          .to({}, { duration: 0.9 });
       });
     }
   }
