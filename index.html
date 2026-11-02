@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Santiago Páez — infrastructure, software, and where controls belong</title>
-<meta name="description" content="Cloud and software engineer. I work on where an access control belongs, and what happens when it sits in the wrong place.">
+<meta name="description" content="Cloud and software engineer. I run Microsoft 365 and Azure for enterprise clients, and build the software that operates them.">
 <meta name="color-scheme" content="light">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,9 +24,10 @@
   <p class="label">Santiago Páez</p>
   <nav aria-label="Sections">
     <ul class="nav">
-      <li><a href="#question">01 — The question</a></li>
-      <li><a href="#evidence">02 — Evidence</a></li>
-      <li><a href="#path">03 — Path</a></li>
+      <li><a href="#work">01 — Work</a></li>
+      <li><a href="#question">02 — Question</a></li>
+      <li><a href="#evidence">03 — Evidence</a></li>
+      <li><a href="#path">04 — Path</a></li>
     </ul>
   </nav>
 </header>
@@ -34,18 +35,39 @@
 <main id="main">
 
   <section class="hero" aria-labelledby="hero-title">
-    <p class="label reveal">San Rafael, Argentina</p>
+    <div class="hero-copy">
+      <p class="label reveal">San Rafael, Argentina</p>
 
-    <h1 id="hero-title" class="display">
-      <span class="line"><span class="line-inner">Santiago</span></span>
-      <span class="line"><span class="line-inner">Páez</span></span>
-    </h1>
+      <h1 id="hero-title" class="display">
+        <span class="line"><span class="line-inner">Santiago</span></span>
+        <span class="line"><span class="line-inner">Páez</span></span>
+      </h1>
 
-    <p class="standfirst reveal">
-      I work where infrastructure and software meet. Most of it comes down to one
-      question: where does a control belong, and what happens when it sits in the
-      wrong place.
-    </p>
+      <p class="standfirst reveal">
+        I run Microsoft 365 and Azure for enterprise clients, and build the software
+        that operates them. Most of it comes down to one question: where does a control
+        belong, and what happens when it sits in the wrong place.
+      </p>
+    </div>
+
+    <dl class="hero-facts reveal">
+      <div>
+        <dt>Now</dt>
+        <dd>ITaaS Consultant at Possumus, since January 2026</dd>
+      </div>
+      <div>
+        <dt>Focus</dt>
+        <dd>Identity, cloud platforms, and the software that runs on them</dd>
+      </div>
+      <div>
+        <dt>Daily stack</dt>
+        <dd>Entra ID, Intune, Azure, TypeScript, Python, PostgreSQL</dd>
+      </div>
+      <div>
+        <dt>Also</dt>
+        <dd>Incident response, CVE remediation, and whatever breaks at 2 a.m.</dd>
+      </div>
+    </dl>
 
     <div class="planes" aria-hidden="true">
       <div class="plane plane-3"></div>
@@ -57,12 +79,91 @@
         <li>Identity</li>
       </ul>
     </div>
+  </section>
 
-    <p class="scroll-hint label" aria-hidden="true">Scroll</p>
+  <section id="work" class="chapter" aria-labelledby="work-title">
+    <p class="label">01</p>
+    <h2 id="work-title">What I actually do all day.</h2>
+
+    <div class="cards">
+
+      <article class="card">
+        <span class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="8" cy="8" r="3.6"/>
+            <path d="M10.6 10.6 L19 19"/>
+            <path d="M16.6 16.6 L19 14.2"/>
+            <path d="M14.2 14.2 L16.4 12"/>
+          </svg>
+        </span>
+        <h3>Identity and endpoints</h3>
+        <p>
+          Microsoft 365, Entra ID, Conditional Access, Intune, Windows Autopilot and
+          Azure Virtual Desktop for enterprise clients. Joiner-mover-leaver, device
+          compliance, application deployment, and the access review nobody wants to do.
+        </p>
+      </article>
+
+      <article class="card">
+        <span class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3 L21 8 L12 13 L3 8 Z"/>
+            <path d="M3 12 L12 17 L21 12"/>
+            <path d="M3 16 L12 21 L21 16"/>
+          </svg>
+        </span>
+        <h3>Cloud and platform</h3>
+        <p>
+          Azure Container Apps, Redis, PostgreSQL and Docker. Scheduled sync pipelines
+          that keep the source system out of the request path, real time across
+          replicas, and deployments that survive their own restarts.
+        </p>
+      </article>
+
+      <article class="card">
+        <span class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="16" rx="2.5"/>
+            <path d="M7 9.5 L10 12.5 L7 15.5"/>
+            <path d="M13 15.5 L17 15.5"/>
+          </svg>
+        </span>
+        <h3>Build and automate</h3>
+        <p>
+          TypeScript and Python. Next.js services with tests and CI, integrations with
+          Microsoft Graph, and internal tools that replace a spreadsheet somebody
+          maintains by hand every Monday.
+        </p>
+      </article>
+
+      <article class="card">
+        <span class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3 L19 6 L19 12 C19 16.2 15.9 19.1 12 21 C8.1 19.1 5 16.2 5 12 L5 6 Z"/>
+            <path d="M12 8.5 L12 13"/>
+            <path d="M12 16 L12 16.01"/>
+          </svg>
+        </span>
+        <h3>Incident response</h3>
+        <p>
+          Ransomware on endpoints, a cryptocurrency miner on a shared server hosting
+          five web properties, and WordPress compromises that re-infected the database.
+          Containment first, CVE remediation after, and a write-up before closing.
+        </p>
+      </article>
+
+    </div>
+
+    <ul class="stats">
+      <li><span class="stat-value">11</span><span class="stat-label">months in production IT</span></li>
+      <li><span class="stat-value">300+</span><span class="stat-label">API endpoints in service</span></li>
+      <li><span class="stat-value">6</span><span class="stat-label">Microsoft credentials</span></li>
+      <li><span class="stat-value">2</span><span class="stat-label">public projects, both tested</span></li>
+    </ul>
   </section>
 
   <section id="question" class="chapter chapter-pinned" aria-labelledby="question-title">
-    <p class="label">01</p>
+    <p class="label">02</p>
     <h2 id="question-title">A control can be correct and still sit in the wrong place.</h2>
 
     <div class="pin">
@@ -108,7 +209,7 @@
   </section>
 
   <section id="evidence" class="chapter" aria-labelledby="evidence-title">
-    <p class="label">02</p>
+    <p class="label">03</p>
     <h2 id="evidence-title">Two measurements, because a claim without a number is a wish.</h2>
 
     <article class="case">
@@ -163,7 +264,7 @@
   </section>
 
   <section id="path" class="chapter" aria-labelledby="path-title">
-    <p class="label">03</p>
+    <p class="label">04</p>
     <h2 id="path-title">Where the infrastructure habit came from.</h2>
 
     <ol class="timeline">
@@ -197,18 +298,6 @@
         <p>Computer Engineering. Final year, six examinations from the degree.</p>
       </li>
     </ol>
-  </section>
-
-  <section class="chapter" aria-labelledby="run-title">
-    <p class="label">04</p>
-    <h2 id="run-title">What I run.</h2>
-
-    <dl class="spec">
-      <div><dt>Identity</dt><dd>Microsoft Entra ID, Conditional Access, App Roles, OAuth 2.0</dd></div>
-      <div><dt>Endpoints</dt><dd>Intune, Windows Autopilot, Azure Virtual Desktop</dd></div>
-      <div><dt>Cloud</dt><dd>Azure Container Apps, Redis, PostgreSQL, Docker</dd></div>
-      <div><dt>Code</dt><dd>TypeScript, Python, Next.js, tests and CI that actually run</dd></div>
-    </dl>
   </section>
 
 </main>
