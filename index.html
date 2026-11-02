@@ -1,0 +1,217 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Santiago Páez — infrastructure, software, and where controls belong</title>
+<meta name="description" content="Cloud and software engineer. I work on where an access control belongs, and what happens when it sits in the wrong place.">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="masthead">
+  <p class="label">Santiago Páez</p>
+  <nav aria-label="Sections">
+    <ul class="nav">
+      <li><a href="#question">01 — The question</a></li>
+      <li><a href="#evidence">02 — Evidence</a></li>
+      <li><a href="#path">03 — Path</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="main">
+
+  <section class="hero" aria-labelledby="hero-title">
+    <p class="label reveal">San Rafael, Argentina</p>
+
+    <h1 id="hero-title" class="display">
+      <span class="line"><span class="line-inner">Santiago</span></span>
+      <span class="line"><span class="line-inner">Páez</span></span>
+    </h1>
+
+    <p class="standfirst reveal">
+      I work where infrastructure and software meet. Most of it comes down to one
+      question: where does a control belong, and what happens when it sits in the
+      wrong place.
+    </p>
+
+    <div class="stack-frame" aria-hidden="true">
+      <svg class="stack" viewBox="0 0 360 300" role="presentation" focusable="false">
+        <g id="plates">
+          <path class="plate plate-3" d="M180 40 L320 110 L180 180 L40 110 Z" />
+          <path class="plate plate-2" d="M180 90 L320 160 L180 230 L40 160 Z" />
+          <path class="plate plate-1" d="M180 140 L320 210 L180 280 L40 210 Z" />
+          <path class="edge" d="M40 110 L40 210 M320 110 L320 210" />
+        </g>
+      </svg>
+    </div>
+
+    <p class="scroll-hint label" aria-hidden="true">Scroll</p>
+  </section>
+
+  <section id="question" class="chapter" aria-labelledby="question-title">
+    <p class="label">01</p>
+    <h2 id="question-title">A control can be correct and still sit in the wrong place.</h2>
+
+    <div class="spread">
+      <div class="prose">
+        <p>
+          Filter search results after ranking and a caller loses the answer entirely when
+          documents they cannot read dominate the top. Filter before, and the answer
+          survives. The permission was right in both cases. Only its position changed.
+        </p>
+        <p>
+          Check permissions inside the prompt and the model has already read what it should
+          never have seen. Check them in the retrieval, and the document never enters the
+          window.
+        </p>
+        <p>
+          The same rule, three positions, three different outcomes. That gap is most of the
+          work.
+        </p>
+      </div>
+
+      <aside class="margin-note">
+        <p class="label">Note</p>
+        <p>
+          None of this is exotic. It is the same discipline as putting authorization on the
+          server instead of the client, moved to a place where most people are still
+          learning it.
+        </p>
+      </aside>
+    </div>
+  </section>
+
+  <section id="evidence" class="chapter" aria-labelledby="evidence-title">
+    <p class="label">02</p>
+    <h2 id="evidence-title">Two measurements, because a claim without a number is a wish.</h2>
+
+    <article class="case">
+      <div class="case-meta">
+        <h3>permission-rag</h3>
+        <p class="label">Python · retrieval · evals</p>
+        <p class="figure-caption">
+          Recall after ranking and then filtering, once 20 restricted near-duplicates compete
+          per topic. Filtering before ranking holds at 100% across the same sweep.
+        </p>
+        <p class="links">
+          <a href="https://github.com/santipaez/permission-rag">Repository</a>
+          <a href="https://github.com/santipaez/permission-rag/blob/main/docs/recall-sweep.svg">Chart</a>
+        </p>
+      </div>
+
+      <div class="case-body">
+        <p class="figure"><span class="figure-value" data-count-to="37">37</span><span class="figure-unit">%</span></p>
+        <p class="prose-small">
+          Sixty topics, 40 shuffles per point, 2,400 trials. The measured values reproduce the
+          closed form, which is the only reason to trust them. My first two versions of this
+          benchmark showed a flat 100% and were both wrong: tie-breaking, token length and
+          digits in the topic names were deciding the result instead of relevance.
+        </p>
+      </div>
+    </article>
+
+    <article class="case">
+      <div class="case-meta">
+        <h3>web-posture</h3>
+        <p class="label">Python · security · CI</p>
+        <p class="figure-caption">
+          Score on the first run against a domain I administer: no DMARC record, no SPF, no
+          content security policy.
+        </p>
+        <p class="links">
+          <a href="https://github.com/santipaez/web-posture">Repository</a>
+          <a href="https://github.com/santipaez/web-posture#readme">Checks</a>
+        </p>
+      </div>
+
+      <div class="case-body">
+        <p class="figure"><span class="figure-value" data-count-to="49">49</span><span class="figure-unit">/100</span></p>
+        <p class="prose-small">
+          Passive checks only: mail policy, TLS, headers, cookie flags and files that should
+          never be served. It refuses to scan without an explicit authorization flag and a
+          recorded reason, because the difference between a posture check and an incident
+          report is a signature.
+        </p>
+      </div>
+    </article>
+  </section>
+
+  <section id="path" class="chapter" aria-labelledby="path-title">
+    <p class="label">03</p>
+    <h2 id="path-title">Where the infrastructure habit came from.</h2>
+
+    <ol class="timeline">
+      <li>
+        <p class="label">2026 — now</p>
+        <h3>Possumus · ITaaS Consultant</h3>
+        <p>
+          Microsoft 365, Entra ID, Intune, Autopilot and Azure Virtual Desktop for enterprise
+          clients. Designed the internal operations platform the IT area runs daily.
+        </p>
+      </li>
+      <li>
+        <p class="label">2025</p>
+        <h3>miservicio · GEPE Sport · Tornaxo</h3>
+        <p>
+          A services marketplace as co-founder, an e-commerce platform with an offline-first
+          mobile app, and an embedded Shopify app for a Dutch client.
+        </p>
+      </li>
+      <li>
+        <p class="label">2023 — 2024</p>
+        <h3>PowerAPP · monolith to services</h3>
+        <p>
+          Containerisation, Redis, and a reverse proxy that taught me more about failure than
+          any tutorial.
+        </p>
+      </li>
+      <li>
+        <p class="label">2021 — now</p>
+        <h3>Universidad de Mendoza</h3>
+        <p>Computer Engineering. Final year, six examinations from the degree.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section class="chapter" aria-labelledby="run-title">
+    <p class="label">04</p>
+    <h2 id="run-title">What I run.</h2>
+
+    <dl class="spec">
+      <div><dt>Identity</dt><dd>Microsoft Entra ID, Conditional Access, App Roles, OAuth 2.0</dd></div>
+      <div><dt>Endpoints</dt><dd>Intune, Windows Autopilot, Azure Virtual Desktop</dd></div>
+      <div><dt>Cloud</dt><dd>Azure Container Apps, Redis, PostgreSQL, Docker</dd></div>
+      <div><dt>Code</dt><dd>TypeScript, Python, Next.js, tests and CI that actually run</dd></div>
+    </dl>
+  </section>
+
+</main>
+
+<footer class="colophon">
+  <p class="label">Contact</p>
+  <p class="contact-line">
+    <a href="mailto:spaezredondo@gmail.com">spaezredondo@gmail.com</a>
+  </p>
+  <p class="contact-line">
+    <a href="https://linkedin.com/in/spaezredondo">LinkedIn</a>
+    <a href="https://github.com/santipaez">GitHub</a>
+  </p>
+  <p class="colophon-note">Built by hand. No template, no page builder.</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+<script src="main.js" defer></script>
+
+</body>
+</html>
