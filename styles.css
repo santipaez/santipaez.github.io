@@ -967,3 +967,31 @@ a:hover {
     font-size: 0.98rem;
   }
 }
+/* ---------- figures and charts ---------- */
+
+.figure-label {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-top: 0.5rem;
+  max-width: 30ch;
+}
+
+.chart {
+  margin: 1.5rem 0 0;
+}
+
+.chart svg {
+  display: block;
+  width: 100%;
+  max-width: 340px;
+  height: auto;
+}
+
+.chart figcaption {
+  margin-top: 0.75rem;
+  font-size: 0.62rem;
+  max-width: 40ch;
+}
