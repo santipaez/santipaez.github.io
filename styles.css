@@ -789,13 +789,47 @@ a:hover {
   translate: none;
   grid-column: 2;
   grid-row: 2;
-  width: min(100%, 280px);
+  width: min(100%, 300px);
   justify-self: end;
-  margin-top: 1.25rem;
+  margin-top: 1.5rem;
+  perspective: 900px;
 }
 
-.plane-legend {
-  display: none;
+.stack {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* Drawn as SVG instead of rotated boxes: a 1px border on a div rotated in 3D
+   aliases into a dashed line, and the plate edges never stay crisp. */
+.stack-plate {
+  fill: none;
+  stroke-width: 1.2;
+  vector-effect: non-scaling-stroke;
+}
+
+.stack-plate-3 {
+  stroke: var(--rule);
+}
+
+.stack-plate-2 {
+  stroke: rgba(91, 87, 76, 0.5);
+  fill: rgba(22, 21, 15, 0.03);
+}
+
+.stack-plate-1 {
+  stroke: var(--accent);
+  fill: rgba(166, 75, 30, 0.09);
+}
+
+@media (max-width: 900px) {
+  .planes {
+    justify-self: center;
+    margin: 1.75rem auto 0;
+    width: min(72vw, 300px);
+  }
 }
 
 /* ---------- capability cards ---------- */
